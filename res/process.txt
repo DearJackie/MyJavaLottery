@@ -1,0 +1,8 @@
+# Prize level(String), prize number(int), numbers/round(int), prize type(string), special with names[strinoptional]
+特等奖,1,1,外星人笔记本,
+一等奖,2,2,Mate20 Pro,
+二等奖,2,2,Mate20,
+二等奖,2,2,无人机,余静
+三等奖,9,3,吹风机,
+三等奖,9,3,耳机,
+四等奖,28,4,1000元现金,

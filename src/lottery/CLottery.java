@@ -7,53 +7,66 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
+
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.BoxLayout;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.GridLayout;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.Frame;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.ButtonGroup;
+
 import java.awt.CardLayout;
+
 import net.miginfocom.swing.MigLayout;
+
 import java.awt.Component;
+
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
 import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JTextField;
+
 import java.awt.Font;
 
+import lottery.CInputs;
+
 public class CLottery extends JFrame {
-	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private boolean m_debug = true; 
 	private String m_btnStateString = "stop"; 
-	private List<String> m_LotteryList = new ArrayList<String>();
-	private int m_LotteryItemsNum = 0;
-	private JLabel m_lblDisplayRef = null;
+	CInputs m_InputRef = null;
+	private JLabel m_lblNamelistRef = null;
+	private JLabel m_lblPrizeLevelRef = null;
+	private JLabel m_lblPrizeTypeRef = null;
 	private String m_currentResult = null;
-	private JTextField textField4thPrize;
-	private JTextField textField3rdPrize;
-	private JTextField textField2ndPrize;
-	private JTextField textField1stPrize;
-	private JTextField textFieldTopPrize;
-	private JTextField textFieldCashPrize;
 	/**
 	 * Launch the application.
 	 */
@@ -84,104 +97,24 @@ public class CLottery extends JFrame {
 		
 		JPanel panelOperation = new JPanel();
 		
-		JPanel panelPrizeType = new JPanel();
-		panelPrizeType.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JPanel panel_5 = new JPanel();
-		panelPrizeType.add(panel_5);
-		panel_5.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JRadioButton rdbtnTopPrize = new JRadioButton("特等奖");
-		panel_5.add(rdbtnTopPrize);
-		buttonGroup.add(rdbtnTopPrize);
-		
-		textFieldTopPrize = new JTextField();
-		panel_5.add(textFieldTopPrize);
-		textFieldTopPrize.setText("1");
-		textFieldTopPrize.setColumns(10);
-		
-		JPanel panel_4 = new JPanel();
-		panelPrizeType.add(panel_4);
-		
-		JRadioButton rdbtnFirstPrize = new JRadioButton("一等奖");
-		panel_4.add(rdbtnFirstPrize);
-		buttonGroup.add(rdbtnFirstPrize);
-		
-		textField1stPrize = new JTextField();
-		panel_4.add(textField1stPrize);
-		textField1stPrize.setText("2");
-		textField1stPrize.setColumns(10);
-		
-		JPanel panel_3 = new JPanel();
-		panelPrizeType.add(panel_3);
-		
-		JRadioButton rdbtnSecondPrize = new JRadioButton("二等奖");
-		panel_3.add(rdbtnSecondPrize);
-		buttonGroup.add(rdbtnSecondPrize);
-		
-		textField2ndPrize = new JTextField();
-		panel_3.add(textField2ndPrize);
-		textField2ndPrize.setText("4");
-		textField2ndPrize.setColumns(10);
-		
-		JPanel panel_2 = new JPanel();
-		panelPrizeType.add(panel_2);
-		
-		JRadioButton rdbtnThirdPrize = new JRadioButton("三等奖");
-		panel_2.add(rdbtnThirdPrize);
-		buttonGroup.add(rdbtnThirdPrize);
-		
-		textField3rdPrize = new JTextField();
-		panel_2.add(textField3rdPrize);
-		textField3rdPrize.setText("18");
-		textField3rdPrize.setColumns(10);
-		
-		JPanel panel_1 = new JPanel();
-		panelPrizeType.add(panel_1);
-		
-		JRadioButton rdbtnFourthPrize = new JRadioButton("四等奖");
-		panel_1.add(rdbtnFourthPrize);
-		buttonGroup.add(rdbtnFourthPrize);
-		
-		textField4thPrize = new JTextField();
-		panel_1.add(textField4thPrize);
-		textField4thPrize.setText("28");
-		textField4thPrize.setColumns(10);
-		
 		JPanel panelStartStop = new JPanel();
 		GroupLayout gl_panelOperation = new GroupLayout(panelOperation);
 		gl_panelOperation.setHorizontalGroup(
 			gl_panelOperation.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelOperation.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panelStartStop, GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+					.addComponent(panelStartStop, GroupLayout.DEFAULT_SIZE, 935, Short.MAX_VALUE)
 					.addContainerGap())
-				.addGroup(gl_panelOperation.createSequentialGroup()
-					.addComponent(panelPrizeType, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGap(24))
 		);
 		gl_panelOperation.setVerticalGroup(
 			gl_panelOperation.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panelOperation.createSequentialGroup()
-					.addGap(18)
-					.addComponent(panelStartStop, GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panelPrizeType, GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
+					.addGap(210)
+					.addComponent(panelStartStop, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
 		);
 		
-		JPanel panel = new JPanel();
-		panelPrizeType.add(panel);
-		
-		JRadioButton rdbtnCash = new JRadioButton("现金奖");
-		panel.add(rdbtnCash);
-		buttonGroup.add(rdbtnCash);
-		
-		textFieldCashPrize = new JTextField();
-		panel.add(textFieldCashPrize);
-		textFieldCashPrize.setText("10");
-		textFieldCashPrize.setColumns(10);
-		
 		JButton btnStartStopButton = new JButton("开始/停止");
+		btnStartStopButton.setFont(new Font("Dialog", Font.BOLD, 30));
 		btnStartStopButton.setIcon(new ImageIcon(CLottery.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPlayDisabled.png")));
 		panelStartStop.add(btnStartStopButton);
 		btnStartStopButton.addActionListener(new ActionListener() {
@@ -192,21 +125,10 @@ public class CLottery extends JFrame {
 					new Thread() {
 						public void run() {
 							while (m_btnStateString == "start") {
-								int index = random(m_LotteryItemsNum);
-								try {
-									String itemName = m_LotteryList.get(index);
-									m_currentResult = itemName;
-									m_lblDisplayRef.setText(itemName);
-								} catch (Exception e) {
-									e.printStackTrace();
-									System.err.println(new StringBuffer("error happens").append(e));
-									System.exit(1);
-								}
-								
+								DisplayResult("start");
 								try {
 									Thread.sleep(50); // in ms
 								} catch (Exception e) {
-									//log.fatal(e);
 									System.err.println("fatal error!");
 								}
 							}
@@ -216,23 +138,14 @@ public class CLottery extends JFrame {
 				else
 				{
 					m_btnStateString = "stop";
+					DisplayResult("stop");
+					//String strs[] = m_InputRef.StartStopRound("stop");
 					
-					String result = new StringBuffer("恭喜").append(m_currentResult)
-                                                           .append("中奖啦！")
-                                                           .toString(); 
-					m_lblDisplayRef.setText(result);	
-			        System.out.println(result);					
-					String currentName = m_currentResult;
-					int k = 0;
-					for (k = 0; k < m_LotteryList.size(); k++)
-					{
-					    if( currentName == m_LotteryList.get(k))
-					    {
-						    break;
-					    }
-					}
-					m_LotteryList.remove(k);
-					m_LotteryItemsNum = m_LotteryList.size();					
+					//String result = m_currentResult;//new StringBuffer("恭喜").append(m_currentResult)
+                                    //                       .append("中奖啦！")
+                                    //                       .toString(); 
+					//m_lblNamelistRef.setText(result);	
+			        //if (m_debug) { System.out.println("prize name list: " + result); }						
 				}
 		}});
 		
@@ -241,15 +154,23 @@ public class CLottery extends JFrame {
 		getContentPane().add(panelDisplay);
 		panelDisplay.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JPanel panelMain = new JPanel();
-		panelDisplay.add(panelMain);
-		panelMain.setLayout(new BorderLayout(0, 0));
+		JLabel lblPrizeLevel = new JLabel("奖项");
+		m_lblPrizeLevelRef = lblPrizeLevel;
+		lblPrizeLevel.setFont(new Font("Dialog", Font.BOLD, 60));
+		lblPrizeLevel.setHorizontalAlignment(SwingConstants.CENTER);
+		panelDisplay.add(lblPrizeLevel);
 		
-		JLabel lblDisplay = new JLabel("");
-		lblDisplay.setFont(new Font("Dialog", Font.BOLD, 50));
-		m_lblDisplayRef = lblDisplay;
+		JLabel lblPrizeType = new JLabel("奖品");
+		m_lblPrizeTypeRef = lblPrizeType;
+		lblPrizeType.setFont(new Font("Dialog", Font.BOLD, 40));
+		lblPrizeType.setHorizontalAlignment(SwingConstants.CENTER);
+		panelDisplay.add(lblPrizeType);
+		
+		JLabel lblDisplay = new JLabel("名单");
+		panelDisplay.add(lblDisplay);
+		lblDisplay.setFont(new Font("Dialog", Font.BOLD, 80));
+		m_lblNamelistRef = lblDisplay;
 		lblDisplay.setEnabled(false);
-		panelMain.add(lblDisplay);
 		lblDisplay.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDisplay.setAlignmentX(Component.CENTER_ALIGNMENT);
 		getContentPane().add(panelOperation);
@@ -257,38 +178,48 @@ public class CLottery extends JFrame {
 		/**
 		 * Load the input file
 		 * */
-		ReadTextFileToArray();
+		m_InputRef = new CInputs();
 	}
 	
-	/**
-	 * A simple example program that reads a into a String using StringBuilder.
-	 */
-	private void ReadTextFileToArray() {
-		String separator = System.getProperty("file.separator");		
-		String input_file_name = new StringBuffer("res").append(separator)
-				                                        .append("inputfile.txt")
-				                                        .toString(); 
-		
-		StringBuilder sb = new StringBuilder();
-		try (BufferedReader br = new BufferedReader(new FileReader(input_file_name ))) {
-		    String line;
-		    while ((line = br.readLine()) != null) {
-		        System.out.println(line);
-		        m_LotteryList.add(line);
-		    }
-		    m_LotteryItemsNum = m_LotteryList.size();
-		} catch (IOException e) {
-		    e.printStackTrace();
+	private void DisplayResult( String operation ) {
+		String strs[] = m_InputRef.StartStopRound(operation);
+		if ( m_debug ) { System.out.println("Returned string length:" + strs.length); }
+
+		int i = 0;
+		m_currentResult = "";
+		while(i < strs.length-1)
+		{
+			if ( strs[i] != "" )
+			{
+				if ( i == 0) 
+				{ 
+					m_lblPrizeLevelRef.setText(strs[i]); 
+				}
+				else if (i == 1) 
+				{
+					m_lblPrizeTypeRef.setText(strs[i]);											
+				}
+				else 
+				{
+					if ( m_currentResult == "" )
+					{
+						m_currentResult = m_currentResult + strs[i];
+					}
+					else
+					{
+						m_currentResult = m_currentResult + "<br>" + strs[i];
+						//"<html>First line and maybe second line</html>"
+					}
+				}
+			}
+			i++;
 		}
+		m_currentResult = "<html>"+m_currentResult + "</html>";
+		m_lblNamelistRef.setText(m_currentResult);
+		
+		if ( operation == "stop")
+		{
+			if (m_debug) { System.out.println("prize name list: " + m_currentResult); }
+		}		
 	}
-	
-	/**
-	 * 产生随机ID
-	 * 
-	 * @return
-	 */
-	private int random(int max) {
-		//log.debug("生成随机数 - start & end");
-		return (int) (Math.random() * m_LotteryItemsNum);
-	}	
 }
