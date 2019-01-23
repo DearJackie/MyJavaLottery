@@ -123,9 +123,49 @@ public class CInputs {
 				m_ProcessCurrentRound -- ;
 			}
 			
-			// Randomize the namelist
+			// Randomize the name list
 			Collections.shuffle(m_NameList);
+			
+			if ( m_debug ) 
+			{
+				System.out.println( "shuffled name list: ");
+				for ( int m = 0; m < m_NameList.size(); m++ ) 
+				{
+					System.out.println( m + "-" + m_NameList.get(m) + "\n");
+				}
+			}
+			
 			// TRICKY: special deal
+			int trickyNameSize = m_Process[m_ProcessCurrentLine].m_SpecialNames.length;
+			for ( int n = 0; n < trickyNameSize; n++)
+			{
+				String currentTrickyName = m_Process[m_ProcessCurrentLine].m_SpecialNames[n];
+				if ( currentTrickyName != "" )
+				{
+					boolean bAlreadyIn = false; 
+					// Check duplicates, make sure not to occur several times
+					for (int dd = 0; dd < divider; dd++)
+					{
+						if ( m_NameList.get(dd) == currentTrickyName )
+						{
+							bAlreadyIn = true;
+							break;
+						}
+					}
+					if ( bAlreadyIn )
+					{
+						m_NameList.add(0, currentTrickyName);
+					}
+				}
+			}
+			if ( m_debug ) 
+			{
+				System.out.println( "name list after tricky: ");
+				for ( int z = 0; z < m_NameList.size(); z++ ) 
+				{
+					System.out.println( z + "-" + m_NameList.get(z) + "\n"); 
+				}
+			}			
 			
 			for (int i = 0; i < divider; i++)
 			{

@@ -92,31 +92,76 @@ public class CLottery extends JFrame {
 		setTitle("抽奖");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{959, 0};
+		gridBagLayout.rowHeights = new int[]{372, 372, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		getContentPane().setLayout(gridBagLayout);
 		
 		JPanel panelDisplay = new JPanel();
+		panelDisplay.setBackground(Color.BLUE);
+		GridBagConstraints gbc_panelDisplay = new GridBagConstraints();
+		gbc_panelDisplay.gridheight = 2;
+		gbc_panelDisplay.gridwidth = 4;
+		gbc_panelDisplay.fill = GridBagConstraints.BOTH;
+		gbc_panelDisplay.insets = new Insets(0, 0, 5, 0);
+		gbc_panelDisplay.gridx = 0;
+		gbc_panelDisplay.gridy = 0;
+		getContentPane().add(panelDisplay, gbc_panelDisplay);
+		GridBagLayout gbl_panelDisplay = new GridBagLayout();
+		gbl_panelDisplay.columnWidths = new int[]{959, 0};
+		gbl_panelDisplay.rowHeights = new int[]{122, 122, 122, 0};
+		gbl_panelDisplay.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panelDisplay.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panelDisplay.setLayout(gbl_panelDisplay);
+		
+		JLabel lblPrizeLevel = new JLabel("奖项");
+		m_lblPrizeLevelRef = lblPrizeLevel;
+		lblPrizeLevel.setFont(new Font("Dialog", Font.BOLD, 60));
+		lblPrizeLevel.setHorizontalAlignment(SwingConstants.CENTER);
+		GridBagConstraints gbc_lblPrizeLevel = new GridBagConstraints();
+		gbc_lblPrizeLevel.fill = GridBagConstraints.BOTH;
+		gbc_lblPrizeLevel.insets = new Insets(0, 0, 5, 0);
+		gbc_lblPrizeLevel.gridx = 0;
+		gbc_lblPrizeLevel.gridy = 0;
+		panelDisplay.add(lblPrizeLevel, gbc_lblPrizeLevel);
+		
+		JLabel lblPrizeType = new JLabel("奖品");
+		m_lblPrizeTypeRef = lblPrizeType;
+		lblPrizeType.setFont(new Font("Dialog", Font.BOLD, 40));
+		lblPrizeType.setHorizontalAlignment(SwingConstants.CENTER);
+		GridBagConstraints gbc_lblPrizeType = new GridBagConstraints();
+		gbc_lblPrizeType.fill = GridBagConstraints.BOTH;
+		gbc_lblPrizeType.insets = new Insets(0, 0, 5, 0);
+		gbc_lblPrizeType.gridx = 0;
+		gbc_lblPrizeType.gridy = 1;
+		panelDisplay.add(lblPrizeType, gbc_lblPrizeType);
+		
+		JLabel lblDisplay = new JLabel("名单");
+		GridBagConstraints gbc_lblDisplay = new GridBagConstraints();
+		gbc_lblDisplay.fill = GridBagConstraints.BOTH;
+		gbc_lblDisplay.gridx = 0;
+		gbc_lblDisplay.gridy = 2;
+		panelDisplay.add(lblDisplay, gbc_lblDisplay);
+		lblDisplay.setFont(new Font("Dialog", Font.BOLD, 80));
+		m_lblNamelistRef = lblDisplay;
+		lblDisplay.setEnabled(false);
+		lblDisplay.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDisplay.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		JPanel panelOperation = new JPanel();
-		
-		JPanel panelStartStop = new JPanel();
-		GroupLayout gl_panelOperation = new GroupLayout(panelOperation);
-		gl_panelOperation.setHorizontalGroup(
-			gl_panelOperation.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelOperation.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panelStartStop, GroupLayout.DEFAULT_SIZE, 935, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		gl_panelOperation.setVerticalGroup(
-			gl_panelOperation.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panelOperation.createSequentialGroup()
-					.addGap(210)
-					.addComponent(panelStartStop, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
-		);
+		GridBagConstraints gbc_panelOperation = new GridBagConstraints();
+		gbc_panelOperation.fill = GridBagConstraints.HORIZONTAL;
+		gbc_panelOperation.gridx = 0;
+		gbc_panelOperation.gridy = 1;
+		getContentPane().add(panelOperation, gbc_panelOperation);
+		panelOperation.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JButton btnStartStopButton = new JButton("开始/停止");
+		panelOperation.add(btnStartStopButton);
 		btnStartStopButton.setFont(new Font("Dialog", Font.BOLD, 30));
 		btnStartStopButton.setIcon(new ImageIcon(CLottery.class.getResource("/com/sun/javafx/webkit/prism/resources/mediaPlayDisabled.png")));
-		panelStartStop.add(btnStartStopButton);
 		btnStartStopButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if ( m_btnStateString == "stop" )
@@ -149,32 +194,6 @@ public class CLottery extends JFrame {
 				}
 		}});
 		
-		panelOperation.setLayout(gl_panelOperation);
-		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
-		getContentPane().add(panelDisplay);
-		panelDisplay.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		JLabel lblPrizeLevel = new JLabel("奖项");
-		m_lblPrizeLevelRef = lblPrizeLevel;
-		lblPrizeLevel.setFont(new Font("Dialog", Font.BOLD, 60));
-		lblPrizeLevel.setHorizontalAlignment(SwingConstants.CENTER);
-		panelDisplay.add(lblPrizeLevel);
-		
-		JLabel lblPrizeType = new JLabel("奖品");
-		m_lblPrizeTypeRef = lblPrizeType;
-		lblPrizeType.setFont(new Font("Dialog", Font.BOLD, 40));
-		lblPrizeType.setHorizontalAlignment(SwingConstants.CENTER);
-		panelDisplay.add(lblPrizeType);
-		
-		JLabel lblDisplay = new JLabel("名单");
-		panelDisplay.add(lblDisplay);
-		lblDisplay.setFont(new Font("Dialog", Font.BOLD, 80));
-		m_lblNamelistRef = lblDisplay;
-		lblDisplay.setEnabled(false);
-		lblDisplay.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDisplay.setAlignmentX(Component.CENTER_ALIGNMENT);
-		getContentPane().add(panelOperation);
-		
 		/**
 		 * Load the input file
 		 * */
@@ -186,6 +205,8 @@ public class CLottery extends JFrame {
 		if ( m_debug ) { System.out.println("Returned string length:" + strs.length); }
 
 		int i = 0;
+		int numNames = 0;
+		String delimeter = "";
 		m_currentResult = "";
 		while(i < strs.length-1)
 		{
@@ -203,12 +224,21 @@ public class CLottery extends JFrame {
 				{
 					if ( m_currentResult == "" )
 					{
+						numNames ++;
 						m_currentResult = m_currentResult + strs[i];
 					}
 					else
 					{
-						m_currentResult = m_currentResult + "<br>" + strs[i];
-						//"<html>First line and maybe second line</html>"
+						if ( (numNames % 2) == 0)
+						{
+							delimeter = "<br>";
+						}
+						else
+						{
+							delimeter = ",";
+						}
+						numNames ++;						
+						m_currentResult = m_currentResult + delimeter + strs[i];
 					}
 				}
 			}
